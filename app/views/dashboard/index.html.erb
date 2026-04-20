@@ -12,31 +12,4 @@
       <p class="text-3xl font-bold text-blue-600"><%= @medications_count %></p>
     </div>
   </div>
-
-  <%# Quick actions %>
-  <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-4">
-    <div class="p-4 border-b border-gray-100">
-      <h3 class="font-semibold text-gray-700">Quick Actions</h3>
-    </div>
-    <div class="divide-y divide-gray-100">
-      <%= link_to "#", class: "flex items-center justify-between p-4 hover:bg-gray-50" do %>
-        <span class="text-gray-700">Check my symptoms</span>
-        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-      <% end %>
-      <%= link_to "#", class: "flex items-center justify-between p-4 hover:bg-gray-50" do %>
-        <span class="text-gray-700">Add a medication</span>
-        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-      <% end %>
-      <%= link_to "#", class: "flex items-center justify-between p-4 hover:bg-gray-50" do %>
-        <span class="text-gray-700">View my health summary</span>
-        <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-        </svg>
-      <% end %>
-    </div>
-  </div>
 </div>
