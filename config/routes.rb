@@ -9,5 +9,13 @@ Rails.application.routes.draw do
   unauthenticated do
     root "devise/sessions#new", as: :unauthenticated_root
   end
+
+  resources :conditions, only: [:index] do
+    collection do
+      get :search
+    end
+  end
+
+  resources :user_conditions, only: [:create, :destroy]
   get "up" => "rails/health#show", as: :rails_health_check
 end
