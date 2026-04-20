@@ -1,0 +1,6 @@
+<nav class="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
+  <h1 class="text-xl font-semibold text-blue-600">Chloe</h1>
+  <% if user_signed_in? %>
+    <span class="text-sm text-gray-500">Hi, <%= current_user.first_name %></span>
+  <% end %>
+</nav>
