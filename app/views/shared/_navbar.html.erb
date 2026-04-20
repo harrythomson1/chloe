@@ -1,6 +1,9 @@
 <nav class="bg-white border-b border-gray-200 px-4 py-3 flex items-center justify-between">
   <h1 class="text-xl font-semibold text-blue-600">Chloe</h1>
   <% if user_signed_in? %>
-    <span class="text-sm text-gray-500">Hi, <%= current_user.first_name %></span>
+    <div class="flex items-center gap-4">
+      <span class="text-sm text-gray-500">Hi, <%= current_user.first_name %></span>
+      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: "text-sm text-gray-500 hover:text-red-500" %>
+    </div>
   <% end %>
 </nav>
