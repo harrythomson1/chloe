@@ -1,0 +1,12 @@
+<%= form_with url: conditions_path, method: :get, data: { turbo_frame: "conditions_results" } do |f| %>
+  <%= f.text_field :query, placeholder: "Search conditions..." %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<%= turbo_frame_tag "conditions_results" do %>
+  <% if @search_results&.any? %>
+    <% search_results.each do |condition| %>
+      <div><%= condition.name %></div>
+    <% end %>
+  <% end %>
+<% end %>
