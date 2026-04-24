@@ -6,7 +6,7 @@
 <%= turbo_frame_tag "conditions_results" do %>
   <% if search_results&.any? %>
     <% search_results.each do |condition| %>
-      <div><%= condition.name %></div>
+      <div><%= condition.name %> <%= button_to 'Add', user_conditions_path, params: { condition_id: condition.id }, method: :post %></div>
     <% end %>
   <% end %>
 <% end %>
