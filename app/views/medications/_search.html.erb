@@ -1,0 +1,12 @@
+<%= form_with url: medications_path, method: :get, data: { turbo_frame: "medications_results" } do |f| %>
+  <%= f.text_field :query, placeholder: "Search medications..." %>
+  <%= f.submit "Search" %>
+<% end %>
+
+<%= turbo_frame_tag "medications_results" do %>
+  <% if search_results&.any? %>
+    <% search_results.each do |medication| %>
+      <div><%= medication.name %></div>
+    <% end %>
+  <% end %>
+<% end %>

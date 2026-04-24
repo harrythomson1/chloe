@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   end
 
   resources :conditions, only: [:index] do
-    collection do
-      get :search
-    end
+  end
+
+  resources :medications, only: [:index] do
   end
 
   resources :user_conditions, only: [:create, :destroy]
