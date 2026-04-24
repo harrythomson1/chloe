@@ -17,5 +17,6 @@ Rails.application.routes.draw do
   end
 
   resources :user_conditions, only: [:create, :destroy]
+  resources :user_medications, only: [:create, :destroy]
   get "up" => "rails/health#show", as: :rails_health_check
 end
