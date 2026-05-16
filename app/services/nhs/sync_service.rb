@@ -23,7 +23,7 @@ module Nhs
         conditions.each do |condition|
           next unless condition['articleStatus'] == 'published'
 
-          Condition.create!(
+          Condition.find_or_create_by!(
             name: condition['name'],
             description: condition['description'],
             source_url: condition['url'],
