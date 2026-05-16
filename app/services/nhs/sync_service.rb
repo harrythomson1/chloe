@@ -13,9 +13,9 @@ module Nhs
       private
 
       def fetch(url)
-        response = Faraday.get(url) do |req|
-          req.headers['apikey'] = Rails.application.credentials.nhs[:api_key]
-        end
+        response = Faraday.new(request: { timeout: 60 }) do |f|
+          f.headers['apikey'] = Rails.application.credentials.nhs[:api_key]
+        end.get(url)
         JSON.parse(response.body)
       end
 
