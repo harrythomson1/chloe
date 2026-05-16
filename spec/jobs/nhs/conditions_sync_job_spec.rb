@@ -1,5 +1,5 @@
 require 'rails_helper'
-RSpec.describe Nhs::SyncJob do
+RSpec.describe Nhs::ConditionsSyncJob do
   it 'calls the sync service' do
     allow(Nhs::SyncService).to receive(:call)
     described_class.perform_now

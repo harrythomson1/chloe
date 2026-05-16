@@ -1,11 +1,10 @@
 module Nhs
   class SyncService
     class << self
-      def call
-        url = 'https://api.service.nhs.uk/nhs-website-content/conditions/'
+      def call(url:, model:)
         while url
           parsed = fetch(url)
-          process(parsed['significantLink'])
+          process(parsed['significantLink'], model)
           url = next_page_url(parsed['relatedLink'])
         end
       end
@@ -19,11 +18,11 @@ module Nhs
         JSON.parse(response.body)
       end
 
-      def process(conditions)
+      def process(conditions, model)
         conditions.each do |condition|
           next unless condition['articleStatus'] == 'published'
 
-          Condition.find_or_create_by!(source_url: condition['url']) do |c|
+          model.find_or_create_by!(source_url: condition['url']) do |c|
             c.name = condition['name']
             c.description = condition['description']
             c.slug = condition['url'].split('/').compact_blank.last
