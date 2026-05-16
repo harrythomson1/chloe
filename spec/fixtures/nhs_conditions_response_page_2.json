@@ -1,0 +1,30 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Conditions A to Z",
+  "significantLink": [
+    {
+      "description": "Botulism is a rare but life-threatening illness that needs immediate hospital treatment.",
+      "linkRelationship": "Result",
+      "@type": "LinkRole",
+      "articleStatus": "published",
+      "mainEntityOfPage": {
+        "@type": "MedicalWebPage",
+        "genre": ["Condition"],
+        "datePublished": "2017-10-17T16:12:58+00:00",
+        "dateModified": "2026-03-06T16:53:37+00:00"
+      },
+      "url": "https://api.service.nhs.uk/nhs-website-content/conditions/botulism/",
+      "name": "Botulism"
+    }
+  ],
+  "relatedLink": [
+    {
+      "@type": "LinkRole",
+      "url": "https://api.service.nhs.uk/nhs-website-content/conditions/?page=1",
+      "name": "First Page",
+      "description": "Link to First Page",
+      "linkRelationship": "Pagination"
+    }
+  ]
+}

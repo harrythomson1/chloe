@@ -1,0 +1,51 @@
+{
+  "@context": "http://schema.org",
+  "@type": "MedicalWebPage",
+  "name": "Conditions A to Z",
+  "significantLink": [
+    {
+      "description": "Acanthosis nigricans is the term for darkened, thickened patches of skin in the armpit and around the groin and neck.",
+      "linkRelationship": "Result",
+      "@type": "LinkRole",
+      "articleStatus": "published",
+      "mainEntityOfPage": {
+        "@type": "MedicalWebPage",
+        "genre": ["Condition"],
+        "datePublished": "2017-10-24T08:48:21+00:00",
+        "dateModified": "2025-06-25T13:04:28+00:00"
+      },
+      "url": "https://api.service.nhs.uk/nhs-website-content/conditions/acanthosis-nigricans/",
+      "name": "Acanthosis nigricans"
+    },
+    {
+      "description": "Achalasia is a disorder of the gullet where it loses the ability to move food along.",
+      "linkRelationship": "Result",
+      "@type": "LinkRole",
+      "articleStatus": "unpublished",
+      "mainEntityOfPage": {
+        "@type": "MedicalWebPage",
+        "genre": ["Condition"],
+        "datePublished": "2017-10-17T15:19:45+00:00",
+        "dateModified": "2023-12-12T10:14:58+00:00"
+      },
+      "url": "https://api.service.nhs.uk/nhs-website-content/conditions/achalasia/",
+      "name": "Achalasia"
+    }
+  ],
+  "relatedLink": [
+    {
+      "@type": "LinkRole",
+      "url": "https://api.service.nhs.uk/nhs-website-content/conditions/?page=1",
+      "name": "First Page",
+      "description": "Link to First Page",
+      "linkRelationship": "Pagination"
+    },
+    {
+      "@type": "LinkRole",
+      "url": "https://api.service.nhs.uk/nhs-website-content/conditions/?page=2",
+      "name": "Next Page",
+      "description": "Link to Next Page",
+      "linkRelationship": "Pagination"
+    }
+  ]
+}
