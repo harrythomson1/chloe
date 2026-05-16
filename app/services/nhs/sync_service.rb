@@ -23,12 +23,11 @@ module Nhs
         conditions.each do |condition|
           next unless condition['articleStatus'] == 'published'
 
-          Condition.find_or_create_by!(
-            name: condition['name'],
-            description: condition['description'],
-            source_url: condition['url'],
-            slug: condition['url'].split('/').compact_blank.last
-          )
+          Condition.find_or_create_by!(source_url: condition['url']) do |c|
+            c.name = condition['name']
+            c.description = condition['description']
+            c.slug = condition['url'].split('/').compact_blank.last
+          end
         end
       end
 
