@@ -1,8 +1,8 @@
 require 'rails_helper'
 RSpec.describe Nhs::SyncService do
   describe '.call' do
+    let(:url) { 'https://api.service.nhs.uk/nhs-website-content/conditions/' }
     it 'makes a request to the NHS API' do
-      url = 'https://api.service.nhs.uk/nhs-website-content/conditions/'
       stub_request(:get, url)
         .to_return(
           status: 200,
@@ -12,12 +12,10 @@ RSpec.describe Nhs::SyncService do
 
       described_class.call(url: url, model: Condition)
 
-      url = 'https://api.service.nhs.uk/nhs-website-content/conditions/'
       expect(a_request(:get, url)).to have_been_made
     end
 
     it 'adds published conditions to the database' do
-      url = 'https://api.service.nhs.uk/nhs-website-content/conditions/'
       stub_request(:get, url)
         .to_return(
           status: 200,
@@ -35,7 +33,6 @@ RSpec.describe Nhs::SyncService do
     end
 
     it 'confirm that the adding conditions is idempotent' do
-      url = 'https://api.service.nhs.uk/nhs-website-content/conditions/'
       stub_request(:get, url)
         .to_return(
           status: 200,
