@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_060859) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_16_094150) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -30,6 +30,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_060859) do
     t.string "slug"
     t.string "source_url"
     t.datetime "updated_at", null: false
+    t.index ["source_url"], name: "index_conditions_on_source_url", unique: true
   end
 
   create_table "medications", force: :cascade do |t|
