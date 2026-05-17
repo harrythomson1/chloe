@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_17_111632) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_17_115020) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "vector"
@@ -24,6 +24,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_17_111632) do
     t.string "source_url"
     t.text "symptoms"
     t.datetime "updated_at", null: false
+    t.index ["embedding"], name: "index_conditions_on_embedding", opclass: :vector_cosine_ops, using: :hnsw
     t.index ["source_url"], name: "index_conditions_on_source_url", unique: true
   end
 
