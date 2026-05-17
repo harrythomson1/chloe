@@ -1,6 +1,8 @@
 module Nhs
   class SyncService
     class << self
+      include Nhs::ApiClient
+
       def call(url:, model:)
         while url
           parsed = fetch(url)
@@ -12,9 +14,7 @@ module Nhs
       private
 
       def fetch(url)
-        response = Faraday.new(request: { timeout: 60 }) do |f|
-          f.headers['apikey'] = Rails.application.credentials.nhs[:api_key]
-        end.get(url)
+        response = connection.get(url)
         JSON.parse(response.body)
       end
 

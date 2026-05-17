@@ -1,6 +1,8 @@
 module Nhs
   class ConditionSymptomsSyncService
     class << self
+      include Nhs::ApiClient
+
       def call
         client = connection
 
@@ -9,14 +11,6 @@ module Nhs
           symptoms_section = JSON.parse(response.body)['hasPart'].find { |part| part['hasHealthAspect'] == 'http://schema.org/SymptomsHealthAspect' }
           symptom = symptoms_section&.[]('description')
           condition.update!(symptoms: symptom) if symptom
-        end
-      end
-
-      private
-
-      def connection
-        Faraday.new(request: { timeout: 60 }) do |f|
-          f.headers['apikey'] = Rails.application.credentials.nhs[:api_key]
         end
       end
     end
