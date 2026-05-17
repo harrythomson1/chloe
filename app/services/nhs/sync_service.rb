@@ -4,8 +4,9 @@ module Nhs
       include Nhs::ApiClient
 
       def call(url:, model:)
+        client = connection
         while url
-          parsed = fetch(url)
+          parsed = fetch(url, client)
           process(parsed['significantLink'], model)
           url = next_page_url(parsed['relatedLink'])
         end
@@ -13,8 +14,8 @@ module Nhs
 
       private
 
-      def fetch(url)
-        response = connection.get(url)
+      def fetch(url, client)
+        response = client.get(url)
         JSON.parse(response.body)
       end
 
