@@ -7,6 +7,7 @@ module Nhs
         client = connection
 
         Condition.find_each do |condition|
+          Rails.logger.debug { "Updating symptoms for #{condition.name}" }
           find_and_update_condition(condition, client)
           sleep(0.5)
         rescue StandardError => e

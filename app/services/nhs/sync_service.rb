@@ -6,6 +6,7 @@ module Nhs
       def call(url:, model:)
         client = connection
         while url
+          Rails.logger.debug { "sourcing #{model}s for #{url}" }
           parsed = fetch(url, client)
           process(parsed['significantLink'], model)
           url = next_page_url(parsed['relatedLink'])
