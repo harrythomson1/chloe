@@ -48,5 +48,17 @@ RSpec.describe Nhs::ConditionSymptomsSyncService do
       described_class.call
       expect(condition.reload.symptoms).to_not be_nil
     end
+
+    it 'does not update conditions without a symptoms section' do
+      described_class.call
+      condition2 = create(:condition, name: 'Asthma', source_url: 'https://api.service.nhs.uk/nhs-website-content/conditions/asthma/')
+      stub_request(:get, condition2.source_url)
+        .to_return(
+          status: 200,
+          body: { 'hasPart' => [] }.to_json,
+          headers: { 'Content-Type' => 'application/json' }
+        )
+      expect(condition2.reload.symptoms).to be_nil
+    end
   end
 end
