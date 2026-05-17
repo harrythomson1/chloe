@@ -10,18 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_16_103049) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_17_051646) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
-
-  create_table "condition_symptoms", force: :cascade do |t|
-    t.bigint "condition_id", null: false
-    t.datetime "created_at", null: false
-    t.bigint "symptom_id", null: false
-    t.datetime "updated_at", null: false
-    t.index ["condition_id"], name: "index_condition_symptoms_on_condition_id"
-    t.index ["symptom_id"], name: "index_condition_symptoms_on_symptom_id"
-  end
 
   create_table "conditions", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -29,6 +20,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_103049) do
     t.string "name"
     t.string "slug"
     t.string "source_url"
+    t.text "symptoms"
     t.datetime "updated_at", null: false
     t.index ["source_url"], name: "index_conditions_on_source_url", unique: true
   end
@@ -41,14 +33,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_103049) do
     t.string "source_url"
     t.datetime "updated_at", null: false
     t.index ["source_url"], name: "index_medications_on_source_url", unique: true
-  end
-
-  create_table "symptoms", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.text "description"
-    t.string "name"
-    t.string "slug"
-    t.datetime "updated_at", null: false
   end
 
   create_table "user_conditions", force: :cascade do |t|
@@ -88,8 +72,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_16_103049) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "condition_symptoms", "conditions"
-  add_foreign_key "condition_symptoms", "symptoms"
   add_foreign_key "user_conditions", "conditions"
   add_foreign_key "user_conditions", "users"
   add_foreign_key "user_medications", "medications"
