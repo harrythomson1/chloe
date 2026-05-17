@@ -6,7 +6,7 @@ RSpec.describe Nhs::ConditionSymptomsSyncService do
       stub_request(:get, condition.source_url)
         .to_return(
           status: 200,
-          body: { 'hasPart' => [] }.to_json,
+          body: Rails.root.join('spec/fixtures/nhs_condition_detail.json').read,
           headers: { 'Content-Type' => 'application/json' }
         )
     end
@@ -42,6 +42,11 @@ RSpec.describe Nhs::ConditionSymptomsSyncService do
 
       expect(a_request(:get, condition.source_url)).to have_been_made
       expect(a_request(:get, condition2.source_url)).to have_been_made
+    end
+
+    it 'adds symptoms to the condition' do
+      described_class.call
+      expect(condition.reload.symptoms).to_not be_nil
     end
   end
 end

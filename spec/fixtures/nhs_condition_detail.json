@@ -1,0 +1,9 @@
+{
+  "hasPart": [
+    {
+      "@type": "HealthTopicContent",
+      "hasHealthAspect": "http://schema.org/SymptomsHealthAspect",
+      "description": "The main symptom is patches of skin that are darker and thicker than usual."
+    }
+  ]
+}
