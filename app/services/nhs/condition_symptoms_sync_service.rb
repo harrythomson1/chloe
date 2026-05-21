@@ -19,7 +19,7 @@ module Nhs
 
       def find_and_update_condition(condition, client)
         response = client.get(condition.source_url)
-        symptoms_section = JSON.parse(response.body)['hasPart'].find { |part| part['hasHealthAspect'] == 'http://schema.org/SymptomsHealthAspect' }
+        symptoms_section = response.body['hasPart'].find { |part| part['hasHealthAspect'] == 'http://schema.org/SymptomsHealthAspect' }
         symptom = symptoms_section&.[]('description')
         condition.update!(symptoms: symptom) if symptom
       end

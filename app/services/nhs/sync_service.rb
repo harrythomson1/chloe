@@ -17,7 +17,7 @@ module Nhs
 
       def fetch(url, client)
         response = client.get(url)
-        JSON.parse(response.body)
+        response.body
       end
 
       def process(conditions, model)
