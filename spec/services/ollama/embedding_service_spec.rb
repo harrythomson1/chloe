@@ -23,5 +23,15 @@ RSpec.describe Ollama::EmbeddingService do
       described_class.call(text: 'I have a shortness of breath')
       expect(a_request(:post, 'http://localhost:11434/api/embeddings')).to have_been_made
     end
+
+    it 'raises an error when the response is not 200' do
+      stub_request(:post, 'http://localhost:11434/api/embeddings')
+        .to_return(
+          status: 500,
+          body: { embedding: Array.new(768) { rand } }.to_json,
+          headers: { 'Content-Type' => 'application/json' }
+        )
+      expect { described_class.call(text: 'test') }.to raise_error(Ollama::Error)
+    end
   end
 end
