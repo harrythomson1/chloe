@@ -1,7 +1,12 @@
 module Ollama
   class EmbeddingService
-    def self.call(text:)
-      Array.new(768) { rand }
+    class << self
+      include Ollama::ApiClient
+
+      def call(text:)
+        client = connection
+        client.post('/api/embeddings', { model: 'nomic-embed-text', prompt: text }).body['embedding']
+      end
     end
   end
 end
