@@ -31,5 +31,13 @@ RSpec.describe Ollama::ConditionsEmbeddingService do
       expect(condition.embedding).to_not be_nil
       expect(condition2.embedding).to_not be_nil
     end
+
+    it 'calls the embedding service with the condition details' do
+      allow(Ollama::EmbeddingService).to receive(:call).and_return(fake_embedding)
+      described_class.call
+      expect(Ollama::EmbeddingService).to have_received(:call).with(
+        text: including("#{condition.name} #{condition.description} #{condition.symptoms}")
+      )
+    end
   end
 end
