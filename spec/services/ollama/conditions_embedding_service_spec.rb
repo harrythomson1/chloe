@@ -19,5 +19,17 @@ RSpec.describe Ollama::ConditionsEmbeddingService do
       condition.reload
       expect(condition.embedding).to_not be_nil
     end
+
+    it 'adds vectors to multiple conditions' do
+      allow(Ollama::EmbeddingService).to receive(:call).and_return(fake_embedding)
+      condition2 = create(:condition, name: 'asthma', source_url: 'testurl.com')
+      expect(condition.embedding).to be_nil
+      expect(condition2.embedding).to be_nil
+      described_class.call
+      condition.reload
+      condition2.reload
+      expect(condition.embedding).to_not be_nil
+      expect(condition2.embedding).to_not be_nil
+    end
   end
 end
