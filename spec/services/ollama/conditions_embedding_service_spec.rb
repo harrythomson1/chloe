@@ -64,5 +64,14 @@ RSpec.describe Ollama::ConditionsEmbeddingService do
       expect(condition.embedding).to be_nil
       expect(condition2.embedding).to_not be_nil
     end
+
+    it 'does not run on jobs where the embedding is not nil' do
+      new_embedding = Array.new(768) { rand }
+      condition.update!(embedding: new_embedding)
+      allow(Ollama::EmbeddingService).to receive(:call).and_return(fake_embedding)
+
+      described_class.call
+      expect(Ollama::EmbeddingService).not_to have_received(:call).with(text: including(condition.name))
+    end
   end
 end
