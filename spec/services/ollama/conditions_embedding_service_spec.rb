@@ -39,5 +39,13 @@ RSpec.describe Ollama::ConditionsEmbeddingService do
         text: including("#{condition.name} #{condition.description} #{condition.symptoms}")
       )
     end
+
+    it 'skips conditions if there are no symptoms and descriptions' do
+      allow(Ollama::EmbeddingService).to receive(:call).and_return(fake_embedding)
+      condition2 = create(:condition, name: 'asthma', source_url: 'testurl.com', description: nil, symptoms: nil)
+      described_class.call
+      condition2.reload
+      expect(condition2.embedding).to be_nil
+    end
   end
 end
