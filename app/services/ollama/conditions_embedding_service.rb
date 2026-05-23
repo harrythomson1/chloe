@@ -8,6 +8,8 @@ module Ollama
           text: "#{condition.name} #{condition.description} #{condition.symptoms}"
         )
         condition.update!(embedding: embedding)
+      rescue Ollama::Error => e
+        Rails.logger.error("Failed to embed condition #{condition.name}: #{e.message}")
       end
     end
   end

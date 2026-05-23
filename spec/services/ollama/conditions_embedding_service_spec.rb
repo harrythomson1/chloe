@@ -47,5 +47,22 @@ RSpec.describe Ollama::ConditionsEmbeddingService do
       condition2.reload
       expect(condition2.embedding).to be_nil
     end
+
+    it 'continues embedding if it hits an error' do
+      condition2 = create(:condition, name: 'asthma', source_url: 'testurl.com')
+      allow(Ollama::EmbeddingService).to receive(:call)
+        .with(text: including(condition.name))
+        .and_raise(Ollama::Error)
+
+      allow(Ollama::EmbeddingService).to receive(:call)
+        .with(text: including(condition2.name))
+        .and_return(fake_embedding)
+
+      described_class.call
+      condition.reload
+      condition2.reload
+      expect(condition.embedding).to be_nil
+      expect(condition2.embedding).to_not be_nil
+    end
   end
 end
